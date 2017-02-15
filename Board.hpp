@@ -16,10 +16,19 @@ class Board {
 		// Groups (N * M) * 3 (3x3 Group, 1x9 Groups, 9x1 Groups)
 		Group_t *pGroups;
 
+		// Init Cells
+		void initCells();
+
+		// Delete Cells
+		void deleteCells();
+
+
 	public:
 		// Public Constructor
 		Board(BoardSize* boardSize);
-
+		
+		// Public Destructor
+		~Board();
 };
 
 #endif

@@ -3,6 +3,8 @@
 
 #include "BoardSize.hpp"
 #include <cassert>
+#include <cstddef>
+
 
 // Cell Type
 class Cell_t {
@@ -17,15 +19,17 @@ class Cell_t {
 		inline bool setValueChecker(int n);
 		
 		// BoardSize
-		BoardSize* boardSize;
+		BoardSize* boardSize = NULL;
+
 	public:
 		// Constructor
-		Cell_t(BoardSize* boardSize);
+		Cell_t();
 
 		// Value Getter and Setter
 		inline void setValue(int n);
 		inline int	getValue();
 		inline void clearValue();
+		inline void	setBoardSize(BoardSize *boardSize);
 };
 
 // Value Checker
@@ -48,6 +52,11 @@ inline int Cell_t::getValue(){
 // Value Celar
 inline void Cell_t::clearValue(){
 	this->val = this->CELL_EMPTY;
+}
+
+// Board Size Setter
+inline void Cell_t::setBoardSize(BoardSize *boardSize){
+	this->boardSize = boardSize;
 }
 
 #endif
