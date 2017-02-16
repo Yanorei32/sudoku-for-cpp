@@ -1,4 +1,4 @@
-CXXFLAGS      = -Wall --pedantic 
+CXXFLAGS      = -g -O0 
 
 DEST	      = .
 
@@ -67,5 +67,5 @@ tags:           $(HDRS) $(SRCS); @ctags $(HDRS) $(SRCS)
 ###
 Board.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp
 BoardSize.o: BoardSize.hpp
-Cell.o: Cell.hpp BoardSize.hpp
+Cell.o: Cell.hpp BoardSize.hpp Group.hpp
 main.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp

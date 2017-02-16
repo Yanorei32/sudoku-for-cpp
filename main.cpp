@@ -1,6 +1,8 @@
-// libs
+// Include Systemlib
 #include <iostream>
 #include <cstdlib>
+
+// Include Userlib
 #include "BoardSize.hpp"
 #include "Board.hpp"
 
@@ -17,12 +19,14 @@ int main(int argc,char *argv[]){
 
 		// Call Board
 		Board board(&boardSize);
-		
+		for(int i= 0;i < 9;i++){
+			cout << i/3 << endl;
+		}
 		// Board Read File
 	//	board.readFile(argv[1]);
 
 		// Calc Start
-	//	board.start();
+		board.calc();
 
 	}else{
 		cout << "Usage : " << argv[0] << " file" << endl;

@@ -1,6 +1,7 @@
-#ifndef BOARD_SIZE
-#define BOARD_SIZE
+#ifndef BOARD_SIZE_HPP
+#define BOARD_SIZE_HPP
 
+// Include Systemlib
 #include <cassert>
 
 // BoardSize Class
@@ -15,8 +16,12 @@ class BoardSize {
 		// N,M MaxVal
 		int MAX;
 
-		// N,M Count
-		// (return MAX)
+		// Cell Count
+		int CELL_COUNT;
+
+		// Group Count
+		int GROUP_COUNT;
+		
 	public:
 		// Constructor
 		BoardSize(int n,int m);
@@ -25,6 +30,7 @@ class BoardSize {
 		inline int getN();
 		inline int getM();
 		inline int getMax();
+		inline int getGroupCount();
 		inline int getCellCount();
 };
 
@@ -35,8 +41,8 @@ inline bool BoardSize::boardSizeChecker(int n,int m){return (2 <= n && 2 <= m);}
 inline int	BoardSize::getN(){return this->N;}
 inline int	BoardSize::getM(){return this->M;}
 inline int	BoardSize::getMax(){return this->MAX;}
-inline int	BoardSize::getCellCount(){return this->MAX;}
-
+inline int	BoardSize::getGroupCount(){return this->GROUP_COUNT;}
+inline int	BoardSize::getCellCount(){return this->CELL_COUNT;}
 
 #endif
 

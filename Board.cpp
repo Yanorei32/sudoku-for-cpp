@@ -1,13 +1,27 @@
+// Include Systemlib
+#include <iostream>
+
+// Include Userlib
 #include "BoardSize.hpp"
 #include "Board.hpp"
 #include "Group.hpp"
 #include "Cell.hpp"
 
+// Usings
+using std::cout;
+using std::endl;
+
+// Constructor
 Board::Board(BoardSize* boardSize) : boardSize(boardSize) {
 	// Init Cells
 	this->initCells();
+
+	// Init Groups
+	this->initGroups();
+
 }
 
+// Destructor
 Board::~Board() {
 	// Delete Cells
 	this->deleteCells();
@@ -19,15 +33,35 @@ void Board::initCells(){
 	int cellCount = (*(this->boardSize)).getCellCount();
 
 	// New
-	this->pCells = new Cell_t[cellCount];
+	this->cells = new Cell[cellCount];
 
 	// Set boardSize Pointer
 	for(int i = 0;i < cellCount;i++)
-		pCells[i].setBoardSize(this->boardSize);
+		this->cells[i].setBoardSize(this->boardSize);
 }
 
 // Delete Cells Function
 void Board::deleteCells(){
 	// Delete Cells
-	delete[] this->pCells;
+	delete[] this->cells;
+}
+
+// Init Groups Function
+void Board::initGroups(){
+	// Get Group Count
+	int groupCount = (*(this->boardSize)).getGroupCount();
+
+	// New
+	this->groups = new Group[groupCount];
+
+	// Set boardSize Pointer
+	for(int i = 0;i < groupCount;i++){
+		this->groups[i].setBoardSize(this->boardSize);
+	}
+}
+
+// Calculation Function
+void Board::calc(){
+	// Debug Message
+	cout << "Test" << endl;
 }
