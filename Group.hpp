@@ -36,7 +36,7 @@ class Group {
 		static const int NM_GROUP	= 2;
 
 		// Value Getter and Setter
-		inline void	setBoardSize(BoardSize *boardSize);
+		inline void setBoardSize(BoardSize *boardSize);
 
 		// Set Group Type
 		inline void setGroupType(int groupType);

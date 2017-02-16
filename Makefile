@@ -7,7 +7,6 @@ EXTHDRS	      =
 HDRS	      = Board.hpp \
 		BoardSize.hpp \
 		Cell.hpp \
-		Config.hpp \
 		Group.hpp
 
 INSTALL	      = cp
@@ -23,6 +22,7 @@ MAKEFILE      = Makefile
 OBJS	      = Board.o \
 		BoardSize.o \
 		Cell.o \
+		Group.o \
 		main.o
 
 PRINT	      = pr
@@ -34,6 +34,7 @@ SHELL	      = /bin/sh
 SRCS	      = Board.cpp \
 		BoardSize.cpp \
 		Cell.cpp \
+		Group.cpp \
 		main.cpp
 
 SYSHDRS	      =
@@ -68,4 +69,5 @@ tags:           $(HDRS) $(SRCS); @ctags $(HDRS) $(SRCS)
 Board.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp
 BoardSize.o: BoardSize.hpp
 Cell.o: Cell.hpp BoardSize.hpp Group.hpp
+Group.o: Group.hpp BoardSize.hpp Cell.hpp
 main.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp
