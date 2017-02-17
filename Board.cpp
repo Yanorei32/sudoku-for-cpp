@@ -65,3 +65,14 @@ void Board::calc(){
 	// Debug Message
 	cout << "Test" << endl;
 }
+
+// Debug Functions
+#ifdef DEBUG
+
+// Get Cell By Position Function (Debug Function)
+Cell *Board::getCellByPos(int x,int y){
+	cout << y-1*this->boardSize->getNM()+(x-1) << endl;
+	return &cells[(y-1)*(this->boardSize->getNM())+(x-1)];
+}
+
+#endif

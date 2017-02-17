@@ -30,6 +30,11 @@ class Board {
 		// Delete Groups
 		void deleteGroups();
 
+#ifdef DEBUG
+		// Get Cell By Position Function (Debug Function)
+		Cell *getCellByPos(int x,int y);
+#endif
+		
 	public:
 		// Public Constructor
 		Board(BoardSize* boardSize);

@@ -10,11 +10,11 @@ class BoardSize {
 		// Board Size Checker
 		inline bool boardSizeChecker(int n,int m);
 
-		// Board Size
+		// Board Size (N: Horizonal,M: Vertical)
 		const int N,M;
 
-		// N,M MaxVal
-		int MAX;
+		// NM Val
+		int NM;
 
 		// Cell Count
 		int CELL_COUNT;
@@ -29,6 +29,7 @@ class BoardSize {
 		// Getter
 		inline int getN();
 		inline int getM();
+		inline int getNM();
 		inline int getMax();
 		inline int getGroupCount();
 		inline int getCellCount();
@@ -40,7 +41,8 @@ inline bool BoardSize::boardSizeChecker(int n,int m){return (2 <= n && 2 <= m);}
 // BoardSize Getter
 inline int	BoardSize::getN(){return this->N;}
 inline int	BoardSize::getM(){return this->M;}
-inline int	BoardSize::getMax(){return this->MAX;}
+inline int	BoardSize::getNM(){return this->NM;}
+inline int	BoardSize::getMax(){return this->NM;}
 inline int	BoardSize::getGroupCount(){return this->GROUP_COUNT;}
 inline int	BoardSize::getCellCount(){return this->CELL_COUNT;}
 
