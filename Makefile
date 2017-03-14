@@ -1,5 +1,5 @@
-CXXFLAGS      = -g -O0 -DDEBUG
-
+#CXXFLAGS	      = -g -O0 -DDEBUG --pedantic -std=c++11 -Wall
+CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
 DEST	      = .
 
 EXTHDRS	      =
@@ -21,21 +21,21 @@ MAKEFILE      = Makefile
 
 OBJS	      = Board.o \
 		BoardSize.o \
-		Cell.o \
+		Main.o \
 		Group.o \
-		main.o
+		Cell.o
 
 PRINT	      = pr
 
-PROGRAM       = ysudoku 
+PROGRAM       = ysudoku
 
 SHELL	      = /bin/sh
 
 SRCS	      = Board.cpp \
-		BoardSize.cpp \
 		Cell.cpp \
 		Group.cpp \
-		main.cpp
+		BoardSize.cpp \
+		Main.cpp
 
 SYSHDRS	      =
 
@@ -66,8 +66,8 @@ print:;		@$(PRINT) $(HDRS) $(SRCS)
 
 tags:           $(HDRS) $(SRCS); @ctags $(HDRS) $(SRCS)
 ###
-Board.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp
+Board.o: Board.hpp BoardSize.hpp Group.hpp Cell.hpp
 BoardSize.o: BoardSize.hpp
-Cell.o: Cell.hpp BoardSize.hpp Group.hpp
-Group.o: Group.hpp BoardSize.hpp Cell.hpp
-main.o: BoardSize.hpp Board.hpp Group.hpp Cell.hpp
+Main.o: Board.hpp BoardSize.hpp Group.hpp Cell.hpp
+Cell.o: Cell.hpp
+

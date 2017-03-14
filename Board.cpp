@@ -1,78 +1,176 @@
-// Include Systemlib
+// include system libs
 #include <iostream>
+#include <cstdio>
 
-// Include Userlib
-#include "BoardSize.hpp"
+// include user libs
 #include "Board.hpp"
-#include "Group.hpp"
 #include "Cell.hpp"
+#include "Group.hpp"
+#include "BoardSize.hpp"
 
-// Usings
+
+// using common functions
 using std::cout;
 using std::endl;
 
-// Constructor
-Board::Board(BoardSize* boardSize) : boardSize(boardSize) {
-	// Init Cells
+
+//--------------------------------------
+// Constructor / Destructor
+//--------------------------------------
+
+// constructor
+Board::Board(char *fileName){
+	// init boardSize
+	this->initBoardSize(3,3);
+
+	// init cells
 	this->initCells();
-
-	// Init Groups
+	
+	// init groups
 	this->initGroups();
+	
+	// read file
+	//this->readCellsByFile(fp);
 
 }
 
-// Destructor
-Board::~Board() {
-	// Delete Cells
+// destructor
+Board::~Board(){
+	// delete boardSize
+	this->deleteBoardSize();
+
+	// delete cells
 	this->deleteCells();
+
+	// delete groups
+	this->deleteGroups();
+
 }
 
-// Init Cells Function
-void Board::initCells(){
-	// Get Cell Count
-	int cellCount = (*(this->boardSize)).getCellCount();
 
-	// New
+//--------------------------------------
+// Cells
+//--------------------------------------
+
+// init cells
+void Board::initCells(){
+	// get cell count by boardSize
+	int cellCount = this->boardSize->getCellCount();
+
+	// new
 	this->cells = new Cell[cellCount];
 
-	// Set boardSize Pointer
-	for(int i = 0;i < cellCount;i++)
-		this->cells[i].setBoardSize(this->boardSize);
+	// set boardsize pointer
+	for(int i = 0;i < cellCount;i++){
+		this->cells[i].setParentClass(this);
+	}
+
 }
 
-// Delete Cells Function
+// delete cells
 void Board::deleteCells(){
-	// Delete Cells
+	// delete cells
 	delete[] this->cells;
+
 }
 
-// Init Groups Function
-void Board::initGroups(){
-	// Get Group Count
-	int groupCount = (*(this->boardSize)).getGroupCount();
+#ifdef DEBUG
 
-	// New
+// get cell by pos (debug)
+Cell *Board::getCellByPos(int x,int y){
+	// dummy
+	cout << "This function is dummy (getCellByPos)" << endl;
+
+	// return null pointer
+	return (Cell*)NULL;
+
+}
+
+
+#endif
+
+
+//--------------------------------------
+// Groups
+//--------------------------------------
+
+// init
+void Board::initGroups(){
+	// get group count
+	int groupCount = this->boardSize->getGroupCount();
+
+	// new
 	this->groups = new Group[groupCount];
 
-	// Set boardSize Pointer
+	// set boardsize pointer
 	for(int i = 0;i < groupCount;i++){
-		this->groups[i].setBoardSize(this->boardSize);
+		this->groups[i].setParentClass(this);
 	}
 }
 
-// Calculation Function
+// delete
+void Board::deleteGroups(){
+	// delete groups
+	delete[] this->groups;
+
+}
+
+
+//--------------------------------------
+// BoardSize
+//--------------------------------------
+
+// init
+void Board::initBoardSize(int x, int y){
+	// create board size
+	this->boardSize = new BoardSize(x,y);
+
+}
+
+// delete
+void Board::deleteBoardSize(){
+	// delete boardSize
+	delete this->boardSize;
+
+}
+
+
+//--------------------------------------
+// Read
+//--------------------------------------
+
+// read header
+void Board::readHeaderByFile(FILE *fp){
+	cout << "Read Header" << endl;
+
+}
+
+// read cells
+void Board::readCellsByFile(FILE *fp){
+	cout << "Read Cells" << endl;
+
+}
+
+
+//--------------------------------------
+// Write
+//--------------------------------------
+
+// Write to console
+void Board::writeToConsole(){
+	cout << "Cell write to console" << endl;
+
+}
+
+
+//--------------------------------------
+// Calc
+//--------------------------------------
+
 void Board::calc(){
-	// Debug Message
-	cout << "Test" << endl;
+	// dummy
+	cout << "This is Dummy Function (calc)" << endl;
+
 }
 
-// Debug Functions
-#ifdef DEBUG
 
-// Get Cell By Position Function (Debug Function)
-Cell *Board::getCellByPos(int x,int y){
-	cout << y-1*this->boardSize->getNM()+(x-1) << endl;
-	return &cells[(y-1)*(this->boardSize->getNM())+(x-1)];
-}
-
-#endif

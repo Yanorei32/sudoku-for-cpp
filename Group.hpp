@@ -1,64 +1,48 @@
-#ifndef GROUP_HPP
-#define GROUP_HPP
+// check
+#ifndef SUDOKU_FOR_CPP_GROUP_HPP
+#define SUDOKU_FOR_CPP_GROUP_HPP
 
-// Include Systemlib
-#include <iostream>
+// include system libs
+#include <cstddef>
 
-// Include Userlib
-#include "BoardSize.hpp"
-#include "Cell.hpp"
-
-// Usings
-using std::cout;
-using std::endl;
-
+// classes
 class Cell;
+class Board;
 
-// Group Class
+// group class
 class Group {
-	private:
-		// Private Define
-		static const int GROUP_TYPE_BRANK = -1;
-
-		// Cell
-		Cell *relateCells;
-
-		// BoardSize
-		BoardSize *boardSize = NULL;
-		
-		// Type
-		int groupType = GROUP_TYPE_BRANK;
-		
 	public:
-		// DEFINE
-		static const int HR_GROUP	= 0;
-		static const int VT_GROUP	= 1;
-		static const int NM_GROUP	= 2;
+		// value setter and getter
+		inline void setParentClass(Board *board);
 
-		// Value Getter and Setter
-		inline void setBoardSize(BoardSize *boardSize);
+		// constructor
+		Group();
 
-		// Set Group Type
-		inline void setGroupType(int groupType);
+	private:
+		// type not set
+		static const int TYPE_NO_SET = -1;
+
+		// associated cells
+		Cell *associatedCells = NULL;
+
+		// board
+		Board *parent = NULL;
+
+		// type
+		int type;
+
+		// init members
+		void initMembers();
+
 };
 
-// Board Size Setter
-inline void Group::setBoardSize(BoardSize *boardSize){
-	// Warn
-	if(this->boardSize != NULL)
-		cout << "WARN: OverWrite boardSize Pointer" << endl;
-	// Write
-	this->boardSize = boardSize;
-}
+// set parent class function
+inline void Group::setParentClass(Board *board){
+	// set parent class
+	this->parent = board;
 
-// Set Group Type 
-inline void Group::setGroupType(int groupType){
-	// Warn
-	if(this->groupType != GROUP_TYPE_BRANK)
-		cout << "WARN: OverWrite Group Type" << endl;
-	// Write
-	this->groupType = groupType;
 }
-
 
 #endif
+
+

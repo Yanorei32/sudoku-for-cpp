@@ -1,81 +1,112 @@
-#ifndef CELL_HPP
-#define CELL_HPP
+// check
+#ifndef SUDOKU_FOR_CPP_CELL_HPP
+#define SUDOKU_FOR_CPP_CELL_HPP
 
-// Include Systemlib
+// include system libs
 #include <cassert>
 #include <cstddef>
+#include <iostream>
 
-// Include Userlib
-#include "BoardSize.hpp"
-#include "Group.hpp"
+// using common functions
+using std::cout;
+using std::endl;
 
+// classes
 class Group;
+class Board;
 
-// Cell Class
+// cell class
 class Cell {
-	private:
-		// DEFINE
+	public:
+		// define
 		static const int CELL_EMPTY = -1;
 
-		// value (-1 is not set)
-		int val;
-		
-		// Value Checkers
-		inline bool setValueChecker(int n);
-		
-		// BoardSize
-		BoardSize *boardSize = NULL;
-
-		// Associated Groups
-		Group *associatedGroups[3];
-
-#ifdef DEBUG
-		// Cell Position
-		int x,y;
-#endif
-
-	public:
-		// Constructor
+		// constructor
 		Cell();
 
-		// Value Getter and Setter
-		inline void setValue(int n);
+		// value setter and getter
+		inline void	setParentClass(Board *board);
+		inline void	setValue(int n);
+		inline void	clearValue();
 		inline int	getValue();
-		inline void clearValue();
-		inline void	setBoardSize(BoardSize *boardSize);
-		void initMemthods();
+		inline bool	isEmpty();
+
 
 #ifdef DEBUG
-		inline void setCellPosition(int index);
+		// set debug method
+		inline void	setCellPosition(int index);
+#endif
+
+	private:
+		// cell value ( default : empty )
+		int val;
+
+		// value checker
+		bool setValueChecker(int n);
+
+		// parent class
+		Board *parent = NULL;
+
+		// associated groups
+		Group *associatedGroups[3];
+
+		// init members
+		inline void initMembers();
+
+#ifdef DEBUG
+		// cell position
+		int x,y;
 #endif
 
 };
 
-// Value Checker
-inline bool Cell::setValueChecker(int n){return (1 <= n && n <= this->boardSize->getMax());}
+// parent setter
+void Cell::setParentClass(Board *parent){
+#ifdef DEBUG
+	// over write WARN ( if debug mode )
+	if(this->parent != NULL) cout << "WARN: over write parent value" << endl;
 
-// Value Setter
-inline void Cell::setValue(int n){
-	// Value Check
+#endif
+
+	// set parent class
+	this->parent = parent;
+
+}
+
+// value getter
+int Cell::getValue(){
+	// return value
+	return this->val;
+
+}
+
+// value setter
+void Cell::setValue(int n){
+	// value check
 	assert(this->setValueChecker(n));
 
-	// Set Value
+	// set value
 	this->val = n;
+
 }
 
-// Value Getter
-inline int Cell::getValue(){
-	return this->val;
-}
-
-// Value Celar
-inline void Cell::clearValue(){
+// value clear
+void Cell::clearValue(){
+	// clear value
 	this->val = this->CELL_EMPTY;
+
 }
 
-// Board Size Setter
-inline void Cell::setBoardSize(BoardSize *boardSize){
-	this->boardSize = boardSize;
+// is empty
+bool Cell::isEmpty(){
+	// return value
+	return (this->val == this->CELL_EMPTY);
+	
+}
+
+void Cell::initMembers(){
+	// init value ( set to empty )
+	this->val = this->CELL_EMPTY;
 }
 
 #endif
