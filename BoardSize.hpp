@@ -15,6 +15,9 @@ class BoardSize {
 		int NM,CELL_COUNT,GROUP_COUNT;
 
 	public:
+		// define
+		static const int MAX_NM = ('9' - '1' + 1) + ('z' - 'a' + 1);
+
 		// constructor
 		BoardSize(int n,int m);
 
@@ -28,7 +31,9 @@ class BoardSize {
 };
 
 // board size checker
-inline bool BoardSize::boardSizeChecker(int n,int m){return (2 <= n && 2<=m);}
+inline bool BoardSize::boardSizeChecker(int n,int m){
+	return ( ( 2 <= this->N && 2 <= this->M ) && ( this->getNM() <= this->MAX_NM ) );
+}
 
 // data getters
 inline int BoardSize::getN(){return this->N;}

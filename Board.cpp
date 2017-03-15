@@ -29,8 +29,11 @@ Board::Board(char *fileName){
 	// init groups
 	this->initGroups();
 	
+	// blank cell count init
+	this->blankCellCountInit();
+
 	// read file
-	//this->readCellsByFile(fp);
+	this->fileReader(fileName);
 
 }
 
@@ -74,20 +77,23 @@ void Board::deleteCells(){
 
 }
 
-#ifdef DEBUG
-
-// get cell by pos (debug)
+// get cell by pos
 Cell *Board::getCellByPos(int x,int y){
-	// dummy
-	cout << "This function is dummy (getCellByPos)" << endl;
+	// Check Value
+	if(0 <= x && 0 <= y && x < this->boardSize->getNM() && y < this->boardSize->getNM()){
+		// return cell
+		return &cells[x * this->boardSize->getNM() + y];
 
-	// return null pointer
-	return (Cell*)NULL;
+	}else{
+		// error ( out of index )
+		cout << "out of index" << endl;
+
+		// return null
+		return (Cell *) NULL;
+
+	}
 
 }
-
-
-#endif
 
 
 //--------------------------------------
@@ -139,14 +145,116 @@ void Board::deleteBoardSize(){
 // Read
 //--------------------------------------
 
+// file reader
+int Board::fileReader(char *fileName){
+	// file pointer
+	FILE *fp;
+
+	// scanFormatString
+	char scanFormatString[16];
+	
+	// buffer
+	char buf[this->boardSize->getNM() + 1];
+	//char buf[9 + 1];
+	cout << this->boardSize->getNM() << endl;
+
+	// cache value
+	int cache;
+
+	// file open
+	if( (fp = fopen(fileName,"r")) == NULL ){
+		// error ( file open fail )
+		cout << "file open fail" << endl;
+
+		// return error code
+		return -1;
+
+	}
+
+	// create format string
+	sprintf(scanFormatString,"%%%ds%%*[^\n]",this->boardSize->getNM());
+
+	// skip comment line
+	fscanf(fp,"%*[^\n]");
+
+	// each line loop
+	for(int i = 0;i < this->boardSize->getNM();i++){
+		// read line and error check
+		if(fscanf(fp,scanFormatString,buf) == EOF){
+			// error ( lack of data )
+			cout << "lack of data (type 0)" << endl;
+
+			// return error code
+			return -1;
+
+		}
+
+		// each char
+		for(int j = 0;j < this->boardSize->getNM();j++){
+			// check value
+			if(buf[j] == '\0'){
+				// null
+				cout << "lack of data (type 1)" << endl;
+
+				// return error code
+				return -1;
+
+			}else if(buf[j] == '.'){
+				// zero
+				this->getCellByPos(i,j)->setValue(Cell::CELL_EMPTY);
+
+			}else{
+				// other value
+				if('1' <= buf[j] && buf[j] <= '9')
+					cache = buf[j] - '0';
+				else if('a' <= buf[j] && buf[j] <= 'z')
+					cache = buf[j] - 'a' + 10;
+				else if('A' <= buf[j] && buf[j] <= 'Z')
+					cache = buf[j] - 'A' + 10;
+				else {
+					// error ( out of range charactor )
+					cout << "out of range charactor" << endl;
+					
+					// return error code
+					return -1;
+
+				}
+
+				// valid
+				if(1 <= cache && cache <= this->boardSize->getNM()){
+					// set value
+					this->getCellByPos(i,j)->setValue(cache);
+					
+					// blank cell count dec
+					this->blankCellCountDec();
+
+				}else{
+					// error ( out of range number )
+					cout << "out of range number" << endl;
+
+					// return error code
+					return -1;
+
+				}
+
+			}
+		}
+
+	}
+	
+	// return success code
+	return 0;
+
+}
+
 // read header
-void Board::readHeaderByFile(FILE *fp){
+void Board::readHeaderByFile(FILE **fp){
 	cout << "Read Header" << endl;
 
 }
 
 // read cells
-void Board::readCellsByFile(FILE *fp){
+void Board::readCellsByFile(FILE **fp){
 	cout << "Read Cells" << endl;
 
 }
@@ -158,10 +266,31 @@ void Board::readCellsByFile(FILE *fp){
 
 // Write to console
 void Board::writeToConsole(){
-	cout << "Cell write to console" << endl;
+	// loop
+	for(int i = 0;i < this->boardSize->getNM();i++){
+		for(int j = 0;j < this->boardSize->getNM();j++){
+			//cout << this->cellValueToChar(this->getCellByPos(i,j)->getValue());
+			cout << this->cellValueToChar(this->getCellByPos(i,j)->getValue());
+			//printf("%c",this->cellValueToChar(this->getCellByPos(i,j)->getValue()));
+		}
+		cout << endl;
+	}
 
 }
 
+char Board::cellValueToChar(int n){
+	// cell value to char
+	if(n == Cell::CELL_EMPTY)
+		return ' ';
+	else if(1 <= n && n <= 9)
+		return '0' + n;
+	else if(10 <= n && n <= ('z'-'a') + 1)
+		return 'a' + ( n - 10 );
+	else{
+		cout << "out of range number" << endl;
+		return '?';
+	}
+}
 
 //--------------------------------------
 // Calc
@@ -170,6 +299,24 @@ void Board::writeToConsole(){
 void Board::calc(){
 	// dummy
 	cout << "This is Dummy Function (calc)" << endl;
+
+}
+
+
+//--------------------------------------
+// Blank Cell Count
+//--------------------------------------
+
+void Board::blankCellCountInit(){
+	this->blankCellCount = this->boardSize->getCellCount();
+}
+
+
+//--------------------------------------
+// Group Cell Association
+//--------------------------------------
+
+void Board::groupCellAssociation(){
 
 }
 

@@ -1,5 +1,6 @@
 #CXXFLAGS	      = -g -O0 -DDEBUG --pedantic -std=c++11 -Wall
-CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
+#CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
+CXXFLAGS      = -std=gnu++11 -g -O0 -DDEBUG --pedantic -Wall
 DEST	      = .
 
 EXTHDRS	      =
