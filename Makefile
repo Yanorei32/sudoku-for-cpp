@@ -1,6 +1,7 @@
 #CXXFLAGS	      = -g -O0 -DDEBUG --pedantic -std=c++11 -Wall
 #CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
 CXXFLAGS      = -std=gnu++11 -g -O0 -DDEBUG --pedantic -Wall
+
 DEST	      = .
 
 EXTHDRS	      =
@@ -22,9 +23,10 @@ MAKEFILE      = Makefile
 
 OBJS	      = Board.o \
 		BoardSize.o \
-		Main.o \
+		Cell.o \
 		Group.o \
-		Cell.o
+		Main.o \
+		main.o
 
 PRINT	      = pr
 
@@ -33,10 +35,11 @@ PROGRAM       = ysudoku
 SHELL	      = /bin/sh
 
 SRCS	      = Board.cpp \
+		BoardSize.cpp \
 		Cell.cpp \
 		Group.cpp \
-		BoardSize.cpp \
-		Main.cpp
+		Main.cpp \
+		main.cpp
 
 SYSHDRS	      =
 
@@ -67,8 +70,9 @@ print:;		@$(PRINT) $(HDRS) $(SRCS)
 
 tags:           $(HDRS) $(SRCS); @ctags $(HDRS) $(SRCS)
 ###
-Board.o: Board.hpp BoardSize.hpp Group.hpp Cell.hpp
+Board.o: Board.hpp Cell.hpp Group.hpp BoardSize.hpp
 BoardSize.o: BoardSize.hpp
-Main.o: Board.hpp BoardSize.hpp Group.hpp Cell.hpp
-Cell.o: Cell.hpp
-
+Cell.o: Cell.hpp Board.hpp BoardSize.hpp
+Group.o: Group.hpp
+Main.o: Board.hpp
+main.o: Board.hpp
