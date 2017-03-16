@@ -154,8 +154,7 @@ int Board::fileReader(char *fileName){
 	char scanFormatString[16];
 	
 	// buffer
-	char buf[this->boardSize->getNM() + 1];
-	//char buf[9 + 1];
+	char buf[BoardSize::MAX_NM + 1];
 	cout << this->boardSize->getNM() << endl;
 
 	// cache value
@@ -269,9 +268,7 @@ void Board::writeToConsole(){
 	// loop
 	for(int i = 0;i < this->boardSize->getNM();i++){
 		for(int j = 0;j < this->boardSize->getNM();j++){
-			//cout << this->cellValueToChar(this->getCellByPos(i,j)->getValue());
 			cout << this->cellValueToChar(this->getCellByPos(i,j)->getValue());
-			//printf("%c",this->cellValueToChar(this->getCellByPos(i,j)->getValue()));
 		}
 		cout << endl;
 	}

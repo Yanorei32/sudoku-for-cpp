@@ -1,6 +1,6 @@
 #CXXFLAGS	      = -g -O0 -DDEBUG --pedantic -std=c++11 -Wall
-#CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
-CXXFLAGS      = -std=gnu++11 -g -O0 -DDEBUG --pedantic -Wall
+CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
+#CXXFLAGS      = -std=gnu++11 -g -O0 -DDEBUG --pedantic -Wall
 
 DEST	      = .
 
@@ -25,8 +25,7 @@ OBJS	      = Board.o \
 		BoardSize.o \
 		Cell.o \
 		Group.o \
-		Main.o \
-		main.o
+		Main.o
 
 PRINT	      = pr
 
@@ -38,8 +37,7 @@ SRCS	      = Board.cpp \
 		BoardSize.cpp \
 		Cell.cpp \
 		Group.cpp \
-		Main.cpp \
-		main.cpp
+		Main.cpp
 
 SYSHDRS	      =
 
@@ -75,4 +73,3 @@ BoardSize.o: BoardSize.hpp
 Cell.o: Cell.hpp Board.hpp BoardSize.hpp
 Group.o: Group.hpp
 Main.o: Board.hpp
-main.o: Board.hpp

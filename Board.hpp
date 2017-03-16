@@ -91,6 +91,10 @@ class Board {
 		
 		// cell value to char
 		char cellValueToChar(int n);
+
+		// group cell association
+		void groupCellAssociation();
+
 };
 
 // is ready func
