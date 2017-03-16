@@ -1,6 +1,8 @@
-#CXXFLAGS	      = -g -O0 -DDEBUG --pedantic -std=c++11 -Wall
-CXXFLAGS      = -g -O0 -DDEBUG --pedantic -Wall -ansi
-#CXXFLAGS      = -std=gnu++11 -g -O0 -DDEBUG --pedantic -Wall
+#CXXFLAGS	  = -std=c++11   -pg -O0 -DDEBUG --pedantic -Wall
+#CXXFLAGS      = -ansi        -pg -O0 -DDEBUG --pedantic -Wall
+#CXXFLAGS      = -std=gnu++11 -pg -O0 -DDEBUG --pedantic -Wall
+CXXFLAGS      = -std=gnu++14 -pg -O0 -DDEBUG --pedantic -Wall
+
 
 DEST	      = .
 
