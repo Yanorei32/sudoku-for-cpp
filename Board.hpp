@@ -73,8 +73,11 @@ class Board {
 		int fileReader(char *fileName);
 
 		// read file
-		void readCellsByFile(FILE **fp);
 		void readHeaderByFile(FILE **fp);
+		void readCellsByFile(FILE **fp);
+
+		// board read atoi
+		void readCharToInt(char c);
 
 		// set status
 		void changeToReady();

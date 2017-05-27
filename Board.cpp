@@ -249,7 +249,7 @@ int Board::fileReader(char *fileName){
 // read header
 void Board::readHeaderByFile(FILE **fp){
 	cout << "Read Header" << endl;
-
+	
 }
 
 // read cells
@@ -283,7 +283,7 @@ char Board::cellValueToChar(int n){
 		return '0' + n;
 	else if(10 <= n && n <= ('z'-'a') + 1)
 		return 'a' + ( n - 10 );
-	else{
+	else {
 		cout << "out of range number" << endl;
 		return '?';
 	}
