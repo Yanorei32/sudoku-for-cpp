@@ -1,6 +1,4 @@
+\.sw[po]$
+\.o$
 ysudoku
 ysudoku.exe
-*.o
-*.swp
-boards/
-

@@ -14,6 +14,7 @@ class Group {
 	public:
 		// value setter and getter
 		inline void setParentClass(Board *board);
+		inline void setAssociatedCells(Cell *cells);
 
 		// constructor
 		Group();
@@ -41,6 +42,12 @@ inline void Group::setParentClass(Board *board){
 	// set parent class
 	this->parent = board;
 
+}
+
+// set associated class function
+inline void Group::setAssociatedCells(Cell *cells){
+	// set associated class
+	this->associatedCells = cells;
 }
 
 #endif

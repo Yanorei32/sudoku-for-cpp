@@ -155,7 +155,6 @@ int Board::fileReader(char *fileName){
 	
 	// buffer
 	char buf[BoardSize::MAX_NM + 1];
-	cout << this->boardSize->getNM() << endl;
 
 	// cache value
 	int cache;
@@ -212,7 +211,7 @@ int Board::fileReader(char *fileName){
 					cache = buf[j] - 'A' + 10;
 				else {
 					// error ( out of range charactor )
-					cout << "out of range charactor" << endl;
+					cout << "out of range charactor (" << buf[j] <<  ")" << endl;
 					
 					// return error code
 					return -1;
@@ -314,7 +313,16 @@ void Board::blankCellCountInit(){
 //--------------------------------------
 
 void Board::groupCellAssociation(){
-	
+	// TODO 作りかけ
+	/*
+	// vertical association
+	for(int i = 0;i < BoardSize.getNM();i++){
+		// group association
+		this.groups[(BoardSize.getNM() * 1) + i]
+	}
+
+	this->getCellByPos();
+	*/
 }
 
 
